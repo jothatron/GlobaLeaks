@@ -24,14 +24,6 @@ describe('admin configure https', function() {
 
     element(by.cssContainingText("button", "Proceed")).click();
 
-    element(by.id("HTTPSAutoMode")).click()
-
-    element(by.cssContainingText("button", "Cancel")).click();
-    browser.gl.utils.waitUntilPresent(modal_action);
-    element(modal_action).click();
-
-    element(by.cssContainingText("button", "Proceed")).click();
-
     element(by.id("HTTPSManualMode")).click()
 
     // Generate key
