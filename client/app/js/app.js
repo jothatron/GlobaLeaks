@@ -833,3 +833,41 @@ factory('noopInterpolation', ['$interpolate', '$translateSanitization', function
   };
 }]).
   config(exceptionConfig);
+
+GLClient.UIMocks = (function() {
+  var mocksRoot = document.querySelector('body');
+
+  var mocks = {};
+
+  var applyMock = function (selector, mock) {
+    var e = document.querySelector(selector);
+    if (e) {
+      if (typeof mock === "function") {
+        mock = mock();
+      }
+
+      if (mock && e.innerHTML != mock) {
+        e.innerHTML = mock;
+      }
+    }
+  }
+
+  var applyMocks = function() {
+    for (var selector in mocks) {
+      applyMock(selector, mocks[selector]);
+    }
+  };
+
+  var config = { attributes: false, childList: true, subtree: true };
+
+  var observer = new MutationObserver(applyMocks);
+
+  observer.observe(mocksRoot, config);
+
+  return {
+    add: function (selector, mock) {
+      mocks[selector] = mock;
+      applyMock(selector, mock);
+    }
+  }:
+})();
