@@ -18,7 +18,7 @@ GLClient.mockEngine = (function() {
     callbacks[path].push(callback);
   };
 
-  var applyMock = function (scope, path, selector, mock) {
+  var applyMock = function (scope, selector, mock) {
     var e = document.querySelector(selector);
     if (e) {
       if (typeof mock === "function") {
@@ -37,7 +37,7 @@ GLClient.mockEngine = (function() {
     for (var path in mocks) {
       if (path === '*' || path === current_path) {
         for (var i=0; i<mocks[path].length; i++) {
-          applyMock(scope, path, mocks[path][i][0], mocks[path][i][1]);
+          applyMock(scope, mocks[path][i][0], mocks[path][i][1]);
         }
       }
     }
